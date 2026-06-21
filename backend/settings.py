@@ -1,3 +1,4 @@
+# backend/settings.py
 from datetime import timedelta
 from pathlib import Path
 import os
@@ -10,6 +11,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# ========== INSTALLED APPS ==========
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -18,10 +20,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    
     # Third party
     'rest_framework',
     'corsheaders',
+    'rest_framework_simplejwt',
+    'channels',
     
     # Local apps
     'projects',
@@ -29,12 +32,9 @@ INSTALLED_APPS = [
     'contacts',
     'home',
     'accounts',
-    'rest_framework_simplejwt',
     'social',
-    'channels',
-
-    
 ]
+
 ASGI_APPLICATION = 'backend.asgi.application'
 
 CHANNEL_LAYERS = {
@@ -43,8 +43,9 @@ CHANNEL_LAYERS = {
     }
 }
 
+# ========== MIDDLEWARE ==========
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # အပေါ်ဆုံးမှာ ထားပါ
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -74,6 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+# ========== DATABASE ==========
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -81,6 +83,7 @@ DATABASES = {
     }
 }
 
+# ========== AUTH PASSWORD VALIDATORS ==========
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -88,32 +91,58 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+# ========== INTERNATIONALIZATION ==========
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Asia/Yangon'
 USE_I18N = True
 USE_TZ = True
 
+# ========== STATIC & MEDIA FILES ==========
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / 'media'  # ← တစ်ခါပဲ သတ်မှတ်ပါ
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS Settings - Allow React frontend
+# ========== CORS SETTINGS ==========
 CORS_ALLOWED_ORIGINS = [
     "https://awara-theta.vercel.app",
+    "https://awara.pythonanywhere.com",  # PythonAnywhere domain ထည့်ပါ
     "http://localhost:5173",
+    "http://localhost:3000",
     "http://127.0.0.1:5173",
-    
-    
+    "http://127.0.0.1:3000",
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+# Development အတွက် (သတိထားပါ - production မှာ ဖယ်ပါ)
+CORS_ALLOW_ALL_ORIGINS = True  # Development အတွက်ပဲသုံးပါ
+
 CORS_ALLOW_CREDENTIALS = True
 
-# REST Framework Settings
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+# ========== REST FRAMEWORK ==========
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -121,14 +150,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',  # For development
+        'rest_framework.permissions.AllowAny',  # Development အတွက်
     ],
 }
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
-from datetime import timedelta
-
+# ========== JWT SETTINGS ==========
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
@@ -136,7 +162,3 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
-# backend/settings.py
-ALLOWED_HOSTS = ['*']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-MEDIA_ROOT = BASE_DIR / 'media'
