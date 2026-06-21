@@ -1,0 +1,58 @@
+[
+  {
+    "model": "blog.blogcategory",
+    "pk": 1,
+    "fields": {
+      "name": "Backend Development",
+      "slug": "backend-development"
+    }
+  },
+  {
+    "model": "blog.blogcategory",
+    "pk": 2,
+    "fields": {
+      "name": "Frontend Development",
+      "slug": "frontend-development"
+    }
+  },
+  {
+    "model": "blog.blogcategory",
+    "pk": 3,
+    "fields": {
+      "name": "UI/UX Design",
+      "slug": "ui-ux-design"
+    }
+  },
+  {
+    "model": "blog.blogcategory",
+    "pk": 4,
+    "fields": {
+      "name": "Mobile App Dev",
+      "slug": "mobile-app-dev"
+    }
+  },
+  {
+    "model": "blog.blogcategory",
+    "pk": 5,
+    "fields": {
+      "name": "Cyber Security",
+      "slug": "cyber-security"
+    }
+  },
+  {
+    "model": "blog.blogcategory",
+    "pk": 6,
+    "fields": {
+      "name": "AI & Data Science",
+      "slug": "ai-data-science"
+    }
+  },
+  {
+    "model": "blog.blogcategory",
+    "pk": 7,
+    "fields": {
+      "name": "Tech News",
+      "slug": "tech-news"
+    }
+  }
+]
