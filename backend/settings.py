@@ -137,12 +137,6 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 # backend/settings.py
-
-# Email Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'lwalkuutech@gmail.com'
-EMAIL_HOST_PASSWORD = 'acpg ndad cmgd tkoa'  # သင် generate လုပ်ထားတဲ့ App Password
-DEFAULT_FROM_EMAIL = 'Lwal Kuu Tech <lwalkuutech@gmail.com>'
+ALLOWED_HOSTS = ['*']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+MEDIA_ROOT = BASE_DIR / 'media'
